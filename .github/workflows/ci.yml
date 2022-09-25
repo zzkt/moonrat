@@ -22,8 +22,8 @@ jobs:
           variant: ${{ matrix.racket-variant }}
           version: ${{ matrix.racket-version }}
       - name: Installing MRG and its dependencies
-        run: raco pkg install --no-docs --auto --name MRG
+        run: raco pkg install --no-docs --auto --name moonrat
       - name: Compiling MRG and building its docs
-        run: raco setup --check-pkg-deps --unused-pkg-deps MRG
+        run: raco setup --check-pkg-deps --unused-pkg-deps moonrat
       - name: Testing MRG
-        run: raco test -x -p MRG
+        run: raco test -x -p moonrat
