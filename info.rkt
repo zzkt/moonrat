@@ -1,0 +1,12 @@
+#lang info
+(define collection "moonrat")
+(define deps '("base" "parsack" "english"))
+(define build-deps '("scribble-lib" "racket-doc" "rackunit-lib"))
+(define scribblings '(("scribblings/moonrat.scrbl" ())))
+(define pkg-desc "Moon Rat Gardener for creating random text generators.")
+(define raco-commands '(("moonrat" moonrat/src/moonrat "random text generator" #f)
+                        ("cp2mg" moonrat/src/cp2mg "convert 'corpora' files" #f)))
+(define version "0.1")
+(define pkg-authors '("nik gaffney"))
+(define license '(GPL-3.0-or-later))
+;; docs and data licensed with either '(CC0-1.0 OR CC-BY-SA-4.0)

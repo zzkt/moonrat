@@ -1,0 +1,79 @@
+// description: Gods and goddesses of norse and germanic myth
+
+output
+  [norse-deity]
+
+norse-deity
+  [norse-goddess]
+  [norse-god]
+
+norse-goddess
+  Baduhenna
+  Bil
+  Beyla
+  Eir
+  Ēostre
+  Freyja
+  Frigg
+  Fulla
+  Gefjun
+  Gersemi
+  Gerðr
+  Gná
+  Gullveig
+  Hariasa
+  Hlín
+  Hretha
+  Hnoss
+  Ilmr
+  Iðunn
+  Irpa
+  Lofn
+  Nanna
+  Nerthus
+  Njörun
+  Rán
+  Rindr
+  Sága
+  Sandraudiga
+  Sif
+  Sigyn
+  Sinthgunt
+  Sjöfn
+  Skaði
+  Snotra
+  Sól
+  Syn
+  Tanfana
+  Þrúðr
+  Þorgerðr
+  Hölgabrúðr
+  Vár
+  Vör
+  Zisa
+
+norse-god
+  Baldr
+  Bragi
+  Dellingr
+  Forseti
+  Freyr
+  Heimdallr
+  Hermóðr
+  Höðr
+  Hœnir
+  Lóðurr
+  Loki
+  Máni
+  Meili
+  Njörðr
+  Odin
+  Óðr
+  Saxnōt
+  Thor
+  Ullr
+  Váli
+  Viðarr
+  Vé
+  Vili
+

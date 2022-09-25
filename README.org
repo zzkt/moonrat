@@ -1,0 +1,137 @@
+# -*- mode: org;  coding: utf-8; -*-
+#+title: Moon Rat Gardener
+
+MRG is a template based text generator closely following the [[https://perchance.org][perchance]] grammar and borrowing features (or non-features) from similar generators such as rant, tracery, lorem ipsum, dada engine etc. MRG aims to be simple to use and easy to read. Extensibility is possible but shouldn’t be at the expense of readability or simplicity. Extraneous syntax is kept to a minimum.
+
+Generators are usually built around substitution from lists (such as this example from the perchance documentation).
+
+#+BEGIN_SRC text
+output
+  Your [pack] contains [item], [item] and [item].
+
+pack
+  purse
+  backpack
+  bag
+  pack
+  knapsack
+  rucksack
+
+item
+  a few coins
+  an old {silver|bronze} ring
+  a handkerchief
+  a shard of bone
+  some lint
+  a tin of tea leaves
+#+END_SRC
+
+This template  generates sentences like “Your purse contains some lint, a few coins and a handkerchief.” or  “Your knapsack contains a few coins, a shard of bones and an old silver ring.”
+
+* Writing templates
+
+Templates are written in plain text with placeholders for text that can be replaced. They are usually based around lists of words or phrases. Special characters are limited to the square and curly brackets. i.e.  “[ ]” and “{ }”. Some examples can be found in the [[file:data][data]] folder
+
+The inclusion of a word in square brackets, like =[word]= will select something from the list called =word=. A list begins with a single word label and is followed by lines indented with 2 spaces.
+
+Curly brackets can be used to indicate a choice, ={this|that|the other}= or a range of numbers ={1-101}= and can be used to generate the correct article or plural for a word using ={a}=  or ={s}= (e.g. =fish{s}=  generates “fishes” and =ox{s}= generates “oxen”)
+
+There are a few modifier functions that can be used to filter the output such as  =[word.modifier]= (e.g.. =[mouse.plural]= give “mice” or =[mouse.upcase]= gives “MOUSE”)
+
+A template needs to include an =output= label with at least one item. An element is chosen randomly from the =output= list and used to generate a single output text.
+
+#+BEGIN_SRC text
+output
+  one word
+#+END_SRC
+
+The =output= items can select from a list like so…
+
+#+BEGIN_SRC text
+output
+  [word]
+
+word
+  lonely
+#+END_SRC
+
+* Install
+
+The package can be installed via the racket package manager
+
+#+BEGIN_SRC shell :dir :wrap SRC text
+racp pkg install moonrat
+#+END_SRC
+
+or installed manually from github
+
+#+BEGIN_SRC shell :dir :wrap SRC text
+git clone https://github.com/zzkt/moonrat
+#+END_SRC
+
+* Generate
+
+Save a template in a file and run =moonrat= to generate text on the command line…
+
+#+BEGIN_SRC shell :dir :wrap SRC text
+raco moonrat data/music-genre.mg
+#+END_SRC
+
+further details…
+
+#+BEGIN_SRC shell :dir :wrap SRC text
+raco moonrat -h
+#+END_SRC
+
+or from a racket programme
+
+#+BEGIN_SRC racket :lang racket :results output
+#lang racket
+(require moonrat)
+(load-generator-file "music-genre.mg")
+(generate)
+#+END_SRC
+
+* Moon Grade Ranter
+
+[[https://tinysubversions.com/][Darius Kazemi]] has compiled a [[https://github.com/dariusk/corpora][collection of copora]] for “the creation of weird internet stuff” specifically for text generation. MRG includes a basic conversion utility to help use the corpora lists with moonrat. The converted lists are not validated in any way and will almost certainly need some manual coercion to be useful.
+
+copora can be converted from a given url or file…
+
+#+BEGIN_SRC shell :dir :wrap SRC text
+raco cp2mg -u https://raw.githubusercontent.com/dariusk/corpora/master/data/colors/fictional.json
+#+END_SRC
+
+#+BEGIN_SRC shell :dir :wrap SRC text
+raco cp2mg -f data/corpora/interjections.json -o data/interjections.mg
+#+END_SRC
+
+* Weird Machinery
+
+The templates are almost certainly a weird machine capable of unexpected machinations using list substitution (well formed recursive lists) and choice (even without assignment). Implementation is left as an exercise for the reader (see also string rewriting and [[https://esolangs.org/wiki/Antigram][antigram]])
+
+* Syntax, grammar and reference
+
+- output
+- a word
+- a [word]
+- {word|another word}
+- {a} thing
+- some thing{s}
+- a [word.plural]
+- [the four word title.title-case]
+- a [nested.list.word]
+- // comments are on a line by themselves (not yet inline)
+
+ (to be continued…)
+
+* links & further
+
+Included, precluded, transcluded and occluded…
+
+ - https://perchance.org/useful-generators
+ - https://perchance.org/generators
+ - https://github.com/rant-lang/rant
+ - https://dev.null.org/dadaengine/manual-1.0/dada_toc.html
+ - https://github.com/dariusk/corpora
+ - https://github.com/catseye/NaNoGenLab
