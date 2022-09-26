@@ -3,6 +3,9 @@
 
 MRG is a template based text generator closely following the [[https://perchance.org][perchance]] grammar and borrowing features (or non-features) from similar generators such as rant, tracery, lorem ipsum, dada engine etc. MRG aims to be simple to use and easy to read. Extensibility is possible but shouldn’t be at the expense of readability or simplicity. Extraneous syntax is kept to a minimum.
 
+[[file:img/moonratgardeners.png]]
+
+
 Generators are usually built around substitution from lists (such as this example from the perchance documentation).
 
 #+BEGIN_SRC text
@@ -67,6 +70,21 @@ or installed manually from github
 
 #+BEGIN_SRC shell :dir :wrap SRC text
 git clone https://github.com/zzkt/moonrat
+#+END_SRC
+
+There an emacs mode for editing templates included (which can be installed via melpa)
+
+#+BEGIN_SRC emacs-lisp
+M-x package install moonrat
+#+END_SRC
+
+and configured as required…
+#+BEGIN_SRC emacs-lisp
+(use-package moonrat
+  :init (setq moonrat-command "raco moonrat") ;; or “moonrat -v“
+  :mode (("\\.mg\\'" . moonrat-mode))
+  :bind (:map moonrat-mode-map
+              ("C-c g" . moonrat-generate)))
 #+END_SRC
 
 * Generate
