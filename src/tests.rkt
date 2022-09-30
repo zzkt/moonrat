@@ -14,6 +14,7 @@
            "generator.rkt")
 
   (define test0 "adjective
+  
   small
   big
   cute
