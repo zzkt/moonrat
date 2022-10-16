@@ -31,9 +31,43 @@
 
 ;;; Code:
 
+(defvar moonrat-command
+  "raco moonrat"
+  "The CLI command to generate texts with.")
+
+;;;###autoload
 (defun moonrat-generate ()
-  "Generate something."
-  (message "not yet..."))
+  "Generate some text from a file or the current buffer."
+  (interactive)
+  (let ((src (completing-read
+              "Generate from: "
+              '(("buffer" 1) ("file" 2))
+              nil t "")))
+    (cond ((string= src "file")
+           (call-interactively #'moonrat-generate-from-file))
+          ((string= src "buffer")
+           (call-interactively #'moonrat-generate-from-buffer)))))
+
+;;;###autoload
+(defun moonrat-generate-from-buffer (&optional buffer)
+  "Generate some text from a template in the current buffer or BUFFER."
+  (interactive)
+  (shell-command
+   (concat moonrat-command " "
+           (buffer-file-name (current-buffer)))
+   (get-buffer-create "*moonrat-output*")
+   (get-buffer-create "*moonrat-errors*")))
+
+;;;###autoload
+(defun moonrat-generate-from-file (&optional file)
+  "Generate some text from a template in FILE."
+  (interactive
+   (list (read-file-name "Template file to use: ")))
+  (shell-command
+   (concat moonrat-command " " file)
+   (get-buffer-create "*moonrat-output*")
+   (get-buffer-create "*moonrat-errors*")))
+
 
 (defvar moonrat-mode-map
   (let ((map (make-sparse-keymap)))
@@ -43,20 +77,6 @@
 (defconst moonrat-keywords
   '(("output" . 'font-lock-function-name-face)))
 
-;; (defconst moonrat-syntax-table
-;;   (let ((table (make-syntax-table)))
-
-;;     ;; brackets
-;;     (modify-syntax-entry ?\{ "(}" table)
-;;     (modify-syntax-entry ?\} "){" table)
-;;     (modify-syntax-entry ?\[ "(]" table)
-;;     (modify-syntax-entry ?\] ")[" table)
-
-;;     ;; / is punctuation, but // is a comment starter
-;;     (modify-syntax-entry ?/ ". 12" table)
-;;     ;; \n ends a comment
-;;     (modify-syntax-entry ?\n ">" table)
-;;     table))
 
 ;;;###autoload
 (define-derived-mode moonrat-mode prog-mode "🌝"
