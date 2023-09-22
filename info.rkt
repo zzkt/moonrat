@@ -8,5 +8,5 @@
                         ("cp2mg" moonrat/src/cp2mg "convert 'corpora' files" #f)))
 (define version "0.1")
 (define pkg-authors '("nik gaffney"))
-(define license '(GPL-3.0-or-later))
+(define license "GPL-3.0-or-later")
 ;; docs and data licensed with either '(CC0-1.0 OR CC-BY-SA-4.0)
