@@ -60,10 +60,10 @@ word
 
 * Install
 
-The package can be installed via the racket package manager
+The package can be installed via the [[https://racket-lang.org/][racket]] package manager
 
 #+BEGIN_SRC shell :dir :wrap SRC text
-racp pkg install moonrat
+raco pkg install moonrat
 #+END_SRC
 
 or installed manually from github
@@ -72,10 +72,10 @@ or installed manually from github
 git clone https://github.com/zzkt/moonrat
 #+END_SRC
 
-There an emacs mode for editing templates included (which can be installed via melpa)
+There is an emacs mode included for editing templates (which can be installed via melpa)
 
 #+BEGIN_SRC emacs-lisp
-M-x package install moonrat
+M-x package-install moonrat
 #+END_SRC
 
 and configured as required…
